@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rania & Ahmed Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#090909;
+color:#fff;
+font-family:'Playfair Display', serif;
+overflow-x:hidden;
+}
+
+.section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:30px;
+text-align:center;
+}
+
+.gold{
+color:#d4af37;
+}
+
+h1{
+font-family:'Great Vibes', cursive;
+font-size:5rem;
+margin-bottom:10px;
+}
+
+h2{
+font-size:2rem;
+font-weight:300;
+letter-spacing:2px;
+}
+
+p{
+margin-top:15px;
+line-height:1.8;
+}
+
+button{
+padding:14px 28px;
+border:none;
+background:#d4af37;
+color:#000;
+font-weight:bold;
+cursor:pointer;
+border-radius:30px;
+margin-top:20px;
+}
+
+.hidden{
+display:none;
+}
+
+/* ENVELOPE */
+
+.envelope-wrapper{
+cursor:pointer;
+margin-top:40px;
+}
+
+.envelope{
+position:relative;
+width:300px;
+height:200px;
+background:#f6f0e6;
+}
+
+.envelope:before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+border-left:150px solid transparent;
+border-right:150px solid transparent;
+border-top:100px solid #e6dfd4;
+transform-origin:top;
+transition:1s;
+z-index:3;
+}
+
+.envelope.open:before{
+transform:rotateX(180deg);
+}
+
+.card{
+position:absolute;
+width:260px;
+height:160px;
+background:white;
+left:20px;
+bottom:20px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:#000;
+transition:1s;
+z-index:2;
+}
+
+.envelope.open .card{
+transform:translateY(-170px);
+}
+
+.card h3{
+font-family:'Great Vibes';
+font-size:2rem;
+color:#d4af37;
+}
+
+/* COUNTDOWN */
+
+.countdown{
+display:flex;
+gap:20px;
+margin-top:30px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.box{
+border:1px solid #d4af37;
+padding:20px;
+width:110px;
+}
+
+.box span{
+display:block;
+font-size:2rem;
+color:#d4af37;
+}
+
+/* LOCATION */
+
+.location-btn{
+text-decoration:none;
+background:#d4af37;
+padding:15px 25px;
+border-radius:30px;
+color:black;
+font-weight:bold;
+margin-top:20px;
+display:inline-block;
+}
+
+/* ANIMATION */
+
+.fade{
+opacity:0;
+transform:translateY(30px);
+transition:1s;
+}
+
+.fade.show{
+opacity:1;
+transform:translateY(0);
+}
+
+</style>
+</head>
+<body>
+
+<section class="section">
+
+<h1>Rania & Ahmed</h1>
+
+<h2 class="gold">18 July 2026</h2>
+
+<p>Tap the envelope to open your invitation</p>
+
+<div class="envelope-wrapper" onclick="openInvitation()">
+
+<div class="envelope" id="envelope">
+
+<div class="card">
+<h3>Save The Date</h3>
+<p>Rania & Ahmed</p>
+<p>18 July 2026</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section hidden fade" id="invitation">
+
+<h1>We Are Getting Married</h1>
+
+<h2 class="gold">Rania & Ahmed</h2>
+
+<p>
+Would be delighted to have you
+celebrate this special day with us
+</p>
+
+<div class="countdown">
+
+<div class="box">
+<span id="days">0</span>
+Days
+</div>
+
+<div class="box">
+<span id="hours">0</span>
+Hours
+</div>
+
+<div class="box">
+<span id="minutes">0</span>
+Minutes
+</div>
+
+<div class="box">
+<span id="seconds">0</span>
+Seconds
+</div>
+
+</div>
+
+</section>
+
+<section class="section hidden fade" id="location">
+
+<h1>Location</h1>
+
+<p>
+FVR6+84M<br>
+Rue Oudjir Amar<br>
+Ouled Yaïch, Blida<br>
+Algeria
+</p>
+
+<a
+class="location-btn"
+target="_blank"
+href="https://www.google.com/maps/search/?api=1&query=FVR6+84M,+Rue+Oudjir+Amar,+Ouled+Yaich,+Blida,+Algeria">
+View Location
+</a>
+
+</section>
+
+<section class="section hidden fade" id="thanks">
+
+<h1>Thank You</h1>
+
+<p>
+We look forward to celebrating
+with you.
+</p>
+
+<h2 class="gold">Rania & Ahmed</h2>
+
+</section>
+
+<script>
+
+function openInvitation(){
+
+document.getElementById("envelope")
+.classList.add("open");
+
+setTimeout(()=>{
+
+document.getElementById("invitation")
+.classList.remove("hidden");
+
+document.getElementById("location")
+.classList.remove("hidden");
+
+document.getElementById("thanks")
+.classList.remove("hidden");
+
+setTimeout(()=>{
+
+document.querySelectorAll(".fade")
+.forEach(el=>el.classList.add("show"));
+
+},200);
+
+window.scrollTo({
+top:window.innerHeight,
+behavior:"smooth"
+});
+
+},1200);
+
+}
+
+const targetDate =
+new Date("July 18, 2026 18:00:00").getTime();
+
+setInterval(()=>{
+
+const now = new Date().getTime();
+
+const distance = targetDate - now;
+
+const days =
+Math.floor(distance/(1000*60*60*24));
+
+const hours =
+Math.floor((distance%(1000*60*60*24))
+/(1000*60*60));
+
+const minutes =
+Math.floor((distance%(1000*60*60))
+/(1000*60));
+
+const seconds =
+Math.floor((distance%(1000*60))
+/1000);
+
+document.getElementById("days").innerHTML=days;
+document.getElementById("hours").innerHTML=hours;
+document.getElementById("minutes").innerHTML=minutes;
+document.getElementById("seconds").innerHTML=seconds;
+
+},1000);
+
+</script>
+
+</body>
+</html>
